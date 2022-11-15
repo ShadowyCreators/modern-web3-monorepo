@@ -1,13 +1,9 @@
 import { Example__factory } from '../typechain/index';
 import chai, { use } from 'chai';
 import { solidity } from "ethereum-waffle";
-import { Contract } from "ethers"
 import { Account } from './utils/types';
-import { ethers, waffle } from "hardhat";
 import { Example } from "../typechain/contracts/Example"
 import { getAccounts } from './utils/accounts';
-import { EtherscanConfig } from '@nomiclabs/hardhat-etherscan/dist/src/types';
-import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/signers';
 
 
 chai.use(solidity);

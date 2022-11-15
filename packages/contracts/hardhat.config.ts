@@ -2,9 +2,6 @@ require("dotenv").config();
 
 import chalk from "chalk";
 import { HardhatUserConfig } from "hardhat/types";
-
-import "@typechain/hardhat";
-import "@nomiclabs/hardhat-ethers";
 import "@nomiclabs/hardhat-etherscan";
 import "@nomiclabs/hardhat-waffle";
 import "hardhat-deploy";
