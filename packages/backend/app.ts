@@ -1,12 +1,12 @@
-import express, { Express, Request, Response } from 'express';
-import dotenv from 'dotenv';
+import express, { Express, Request, Response } from 'express'
+import dotenv from 'dotenv'
 
-dotenv.config();
+dotenv.config()
 
-const app: Express = express();
+const app: Express = express()
 
 app.get('/', (req: Request, res: Response) => {
-  res.send('Hello World!');
-});
+  res.send('Hello World!')
+})
 
-export default app;
+export default app
