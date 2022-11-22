@@ -17,7 +17,7 @@ const walletConnected = useConnectWallet()
         <div v-if="walletConnected.connectedWallet">
           <p class="py-6">
             You can deploy your own 'example.sol' contract or use this test contract address:
-            0x06c742474F40b77B747bC447096B6c3d3e596E71
+            0x06c742474F40b77B747bC447096B6c3d3e596E71 (Goerli testnet)
           </p>
           <h2>
             <ContractCard />
