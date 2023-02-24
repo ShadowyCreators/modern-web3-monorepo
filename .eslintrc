@@ -1,9 +1,25 @@
 {
-  "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint"],
-  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
-  "parserOptions": { "ecmaVersion": 2018, "sourceType": "module" },
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true,
+    "amd": true,
+    "vue/setup-compiler-macros": true
+  },
+  "plugins": ["@typescript-eslint", "unused-imports"],
+  "extends": ["eslint:recommended", "plugin:vue/vue3-recommended", "@vue/typescript/recommended", "prettier"],
+  "parser": "vue-eslint-parser",
+  "parserOptions": {
+    "ecmaVersion": 2020
+  },
   "rules": {
-    "no-unused-vars": "warn"
-  }
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "vue/no-mutating-props": "off",
+    "vue/no-v-model-argument": "off",
+    "vue/require-default-prop": "off",
+    "vue/require-prop-types": "off",
+    "unused-imports/no-unused-imports": "error"
+  },
+  "fixOnSave": true
 }

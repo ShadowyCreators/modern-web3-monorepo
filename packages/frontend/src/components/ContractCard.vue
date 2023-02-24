@@ -1,8 +1,8 @@
 <script setup lang="ts">
+import { ethers } from 'ethers'
+import { ref } from 'vue'
 import { exampleOperations } from '../composable/exampleOperations'
 import { exampleContractInfo } from '../stores/erc20Contract'
-import { ethers } from 'ethers'
-import { ref, unref } from 'vue'
 
 const contractAddress = ref('')
 
