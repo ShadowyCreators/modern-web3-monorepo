@@ -5,3 +5,5 @@ const envSchema = z.object({
         .string()
         .url()
 })
+
+export const parsedEnv = envSchema.safeParse(process.env)
