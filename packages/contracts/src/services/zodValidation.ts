@@ -4,7 +4,6 @@ require('dotenv').config()
 const envSchema = z.object({
     MNEMONIC: z
         .string()
-        .optional()
         .refine(
           mnemonic => !mnemonic || mnemonic.split(/[\s,|-]+/).length === 12 || mnemonic.split(/[\s,|-]+/).length === 24
         ),
