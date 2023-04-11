@@ -11,12 +11,18 @@ const envSchema = z.object({
     FORK_ETH_URL: z
             .string()
             .url(), 
-    FORK: z.number(), 
+    FORK: z
+        .boolean()
+        .optional(), 
     FORK_POL_URL: z
         .string()
         .url(), 
-    FORK_CHAINID: z.string(), 
-    POLYGONSCAN_API_KEY: z.string()
+    FORK_CHAINID: z
+        .string()
+        .optional(), 
+    POLYGONSCAN_API_KEY: z
+        .string()
+        .optional()
 })
 
 const parsedEnv = envSchema.safeParse(process.env)
@@ -26,4 +32,3 @@ if(!parsedEnv.success){
     process.exit(1)
 }
 export const validatedENV = parsedEnv.data
-
