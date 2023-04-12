@@ -8,21 +8,11 @@ const envSchema = z.object({
           mnemonic => !mnemonic || mnemonic.split(/[\s,|-]+/).length === 12 || mnemonic.split(/[\s,|-]+/).length === 24
         ),
     INFURA_TOKEN: z.string(),
-    FORK_ETH_URL: z
-            .string()
-            .url(), 
-    FORK: z
-        .boolean()
-        .optional(), 
-    FORK_POL_URL: z
-        .string()
-        .url(), 
-    FORK_CHAINID: z
-        .string()
-        .optional(), 
-    POLYGONSCAN_API_KEY: z
-        .string()
-        .optional()
+    FORK_ETH_URL: z.string().url(), 
+    FORK: z.boolean().optional(), 
+    FORK_POL_URL: z.string().url(), 
+    FORK_CHAINID: z.string().optional(), 
+    POLYGONSCAN_API_KEY: z.string().optional()
 })
 
 const parsedEnv = envSchema.safeParse(process.env)
