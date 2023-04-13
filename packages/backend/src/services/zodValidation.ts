@@ -1,13 +1,7 @@
 import {z} from 'zod'
 
 const envSchema = z.object({
-    PORT: z.number().optional()
+    PORT: z.string().refine((val) => !Number.isNaN(parseInt(val, 10))).optional()
 })
 
-const parsedEnv = envSchema.safeParse(process.env)
-
-if(!parsedEnv.success){
-    console.error('❌ Invalid environment variables.', JSON.stringify(parsedEnv.error.format(), null, 4))
-    process.exit(1)
-}
-export const validatedENV = parsedEnv.data
+export const parsedEnv = envSchema.parse(process.env)
