@@ -1,5 +1,4 @@
-require('dotenv').config()
-
+import { parsedEnv } from './src/services/zodValidation'
 import chalk from 'chalk'
 import { HardhatUserConfig } from 'hardhat/types'
 import '@typechain/hardhat'
@@ -9,19 +8,19 @@ import 'hardhat-deploy'
 import 'solidity-coverage'
 
 const forkingEthConfig = {
-  url: <string>process.env.FORK_ETH_URL
-  // blockNumber: parseInt(process.env.FORK_BLOCK_NUMBER!),
+  url: <string>parsedEnv.FORK_ETH_URL
+  // blockNumber: parseInt(parsedEnv.FORK_BLOCK_NUMBER!),
 }
 
 const forkingPolConfig = {
-  url: <string>process.env.FORK_POL_URL
-  // blockNumber: parseInt(process.env.FORK_BLOCK_NUMBER!),
+  url: <string>parsedEnv.FORK_POL_URL
+  // blockNumber: parseInt(parsedEnv.FORK_BLOCK_NUMBER!),
 }
 
 const mochaConfig = {
   grep: '@forked',
-  invert: !process.env.FORK,
-  timeout: process.env.FORK ? 150000 : 20000
+  invert: !parsedEnv.FORK,
+  timeout: parsedEnv.FORK ? 150000 : 20000
 } as Mocha.MochaOptions
 
 checkForkedProviderEnvironment()
@@ -46,16 +45,16 @@ const config: HardhatUserConfigExtended = {
   },
   networks: {
     hardhat: {
-      chainId: process.env.FORK ? parseInt(process.env.FORK_CHAINID!) : 31337,
+      chainId: parsedEnv.FORK ? parseInt(parsedEnv.FORK_CHAINID!) : 31337,
       // gas: "auto",
       // allowUnlimitedContractSize: true,
-      forking: process.env.FORK
-        ? process.env.FORK_CHAINID == (1).toString()
+      forking: parsedEnv.FORK
+        ? parsedEnv.FORK_CHAINID == (1).toString()
           ? forkingEthConfig
           : forkingPolConfig
         : undefined,
       accounts: {
-        mnemonic: process.env.MNEMONIC,
+        mnemonic: parsedEnv.MNEMONIC,
         accountsBalance: '1000000000000000000000000000000'
       },
       live: false,
@@ -64,9 +63,9 @@ const config: HardhatUserConfigExtended = {
     },
     polygon: {
       chainId: 137,
-      url: 'https://polygon-mainnet.infura.io/v3/' + process.env.INFURA_TOKEN,
+      url: 'https://polygon-mainnet.infura.io/v3/' + parsedEnv.INFURA_TOKEN,
       // @ts-ignore
-      accounts: { mnemonic: process.env.MNEMONIC },
+      accounts: { mnemonic: parsedEnv.MNEMONIC },
       live: true,
       saveDeployments: true,
       tags: ['polygon']
@@ -86,17 +85,17 @@ const config: HardhatUserConfigExtended = {
   },
   verify: {
     etherscan: {
-      apiKey: process.env.POLYGONSCAN_API_KEY
+      apiKey: parsedEnv.POLYGONSCAN_API_KEY
     }
   }
 }
 
 function checkForkedProviderEnvironment() {
   if (
-    process.env.FORK &&
-    ((!process.env.FORK_ETH_URL && !process.env.FORK_POL_URL) ||
-      process.env.FORK_ETH_URL === 'fake_fork_endpoint' ||
-      process.env.FORK_POL_URL === 'fake_fork_endpoint')
+    parsedEnv.FORK &&
+    ((!parsedEnv.FORK_ETH_URL && !parsedEnv.FORK_POL_URL) ||
+      parsedEnv.FORK_ETH_URL === 'fake_fork_endpoint' ||
+      parsedEnv.FORK_POL_URL === 'fake_fork_endpoint')
   ) {
     console.log(
       chalk.red(
